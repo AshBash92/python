@@ -2,17 +2,26 @@ def valid():
     print("\nPLEASE ENTER A VALID ANSWER.")
 
 def play_again():
-    print("\nWould you like to try again? (y/n): ")
-    x = input().lower()
+    invalid = True
 
-    if x == "n":
-        loop = False
-    elif x == "y":
-        loop = True
-        print("\n= = = = = = = = = = = = = = = = = = = = = = = = =")
+    while invalid == True:
+        invalid = False
+        print("\nWould you like to try again? (y/n): ")
+        x = input().lower()
+
+        if x == "n":
+            loop = False
+        elif x == "y":
+            loop = True
+            print("\n= = = = = = = = = = = = = = = = = = = = = = = = =")
+        else:
+            print("\nPLEASE ENTER A VALID ANSWER.")
+            invalid = True
     
     return loop
 
+#CREDIT: GAME OVER ASCII ART
+#https://emojicombos.com/game-over-ascii-art
 def game_over(choice):
     print('''
         ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⢀⣤⣤⣤⣶⣶⣷⣤⣀
@@ -36,19 +45,22 @@ def game_over(choice):
         ''')
 
     print("\n= = = = = = = = = = = = = = = = = = = = = = = = =")
+    
+    # Define the mapping of choice values to variable names
+    mapping = {
+        "right": "You fell into a hole.",
+        "swim": "You got attacked by a shark.",
+        "red": "It's a room full of fire.",
+        "blue": "You enter a room of beasts.",
+    }
 
-    # The choice argument should pass through one of these four variable NAMES
-    right ="You fell into a hole."
-    swim = "You got attacked by a shark."
-    red = "It's a room full of fire."
-    blue = "You enter a room of beasts."
-
-    # What I was trying to do here is have the choice variable will eventually call another variable by name
-    # test = "{" + choice + "}"
-    test = (choice)
-    print( test )
+    # Get the value of the choice variable and use it to look up the corresponding value in the mapping
+    ending = mapping.get(choice)
+    print(ending)
 
 
+#CREDIT: CANDY ASCII ART
+#https://emojicombos.com/candy-ascii-art
 print('''⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⡴⠶⠞⢛⣉⣉⠉⠉⠉⠻⠶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠞⠋⢀⣤⠆⠀⠀⠙⠛⠀⠀⠀⠘⠷⣦⠉⠛⢦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -98,7 +110,7 @@ while loop == True:
             loop = play_again()
         elif road != "left":
             valid()
-        elif road == "left":
+        else:
             break
         
     #LAKE LOOP
@@ -109,10 +121,10 @@ while loop == True:
         if lake == "swim":
             game_over(lake)
             loop = play_again()
-        elif lake != "wait":
-            valid()
         elif lake == "wait":
             break
+        else:
+            valid()
 
     #ISLAND LOOP
     while loop == True:
@@ -128,8 +140,7 @@ while loop == True:
         elif color == "yellow":
             print("\nYou found the hidden candy stash! You win!")
             loop == play_again()
-            break
-        elif color != ( "red" or "blue" or "yellow" ):
+        else:
             valid()
 
 
