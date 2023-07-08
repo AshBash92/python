@@ -96,30 +96,20 @@ print('''
 
 #TODO: READ HIGH SCORES
 
+choice = ''
 money = 1000
 
 while True:
-    if money <= 0:
-        print('\nSORRY, YOU JUST WENT BROKE. ')
-
-    choice = input("\nWould you like to play again? ( y for yes, n for no )\n").lower()
-    if choice == 'n':
-        print()
-        break
-    elif choice == 'y' and money <= 0:
-        money == 1000
-    elif choice != 'n' and choice != 'y':
-        print('\nIt seems you mistyped, but too lazy to add the retry step so imma make you play again.')
     
-    print("\n\nMONEY: $" + str(money))
-
     while True:
+
+        print("\n\nMONEY: $" + str(money))
         wager = input("\nHow much would you like to bet? ( Enter an amount within your money range or QUIT )\n$").lower()
 
         if wager == 'quit':
             print()
             break
-        elif int(wager) > money or int(wager) < 0:
+        elif int(wager) > money or int(wager) <= 0:
             print('Please enter any amount between 0 and ' + str(money + 1) + ' or QUIT')
         else:
             break
@@ -181,5 +171,18 @@ while True:
     if choice == 'quit':
         print()
         break
+
+    if money <= 0:
+        print('\nSORRY, YOU JUST WENT BROKE. ')
+
+    choice = input("\nWould you like to play again? ( y for yes, n for no )\n").lower()
+    if choice == 'n':
+        print()
+        break
+    elif choice == 'y' and money <= 0:
+        print('\nAlright, here\'s another grand.')
+        money += 1000
+    elif choice != 'n' and choice != 'y':
+        print('\nIt seems you mistyped, but too lazy to add the retry step so imma make you play again.')
 
 print('\nGAME OVER\nThanks for playing!')

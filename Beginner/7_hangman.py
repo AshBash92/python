@@ -1,3 +1,7 @@
+#README
+#This game requires an extra install because I be too lazy to make a list of words
+#But also wanted to explore existing libraries out there
+
 import nltk
 from nltk.corpus import brown
 from nltk.corpus import stopwords
